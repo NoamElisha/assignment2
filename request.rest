@@ -1,0 +1,49 @@
+### Health
+GET http://localhost:3000/health
+
+### Assignment 1 - Posts
+# Add New Post
+# POST http://localhost:3000/post
+# Content-Type: application/json
+#
+# {
+#   "sender": "<sender_id>",
+#   "content": "hello"
+# }
+
+# Get All Posts
+# GET http://localhost:3000/post
+
+# Get Post by ID
+# GET http://localhost:3000/post/<post_id>
+
+# Get Posts by Sender
+# GET http://localhost:3000/post?sender=<sender_id>
+
+# Update a Post
+# PUT http://localhost:3000/post/<post_id>
+# Content-Type: application/json
+#
+# {
+#   "content": "updated"
+# }
+
+### Assignment 1 - Comments (CRUD + by post)
+# POST http://localhost:3000/comments
+# GET http://localhost:3000/comments/<comment_id>
+# PUT http://localhost:3000/comments/<comment_id>
+# DELETE http://localhost:3000/comments/<comment_id>
+# GET http://localhost:3000/post/<post_id>/comments
+
+### Assignment 2 - Users (CRUD)
+# POST http://localhost:3000/users
+# GET http://localhost:3000/users
+# GET http://localhost:3000/users/<user_id>
+# PUT http://localhost:3000/users/<user_id>
+# DELETE http://localhost:3000/users/<user_id>
+
+### Assignment 2 - Auth (JWT + Refresh)
+# POST http://localhost:3000/auth/register
+# POST http://localhost:3000/auth/login
+# POST http://localhost:3000/auth/logout
+# POST http://localhost:3000/auth/refresh
