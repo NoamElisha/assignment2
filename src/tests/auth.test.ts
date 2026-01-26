@@ -1,8 +1,8 @@
 import request from "supertest";
 import mongoose from "mongoose";
-import { app } from "../src/app";
+import { app } from "../app";
 
-const TEST_MONGO_URI = "mongodb://127.0.0.1:27017/assignment2_test";
+const TEST_MONGO_URI = "mongodb://admin:admin@localhost:27017/";
 
 beforeAll(async () => {
   await mongoose.connect(TEST_MONGO_URI);

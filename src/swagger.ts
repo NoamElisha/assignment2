@@ -163,6 +163,157 @@ export const swaggerSpec = {
         },
       },
     },
+
+    // POSTS (CRUD)
+    "/post": {
+      post: {
+        summary: "Create post",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": { schema: { $ref: "#/components/schemas/PostCreate" } },
+          },
+        },
+        responses: {
+          "201": {
+            description: "Created",
+            content: {
+              "application/json": { schema: { $ref: "#/components/schemas/Post" } },
+            },
+          },
+          "400": { description: "Bad Request" },
+        },
+      },
+      get: {
+        summary: "Get all posts",
+        responses: {
+          "200": {
+            description: "OK",
+            content: {
+              "application/json": {
+                schema: { type: "array", items: { $ref: "#/components/schemas/Post" } },
+              },
+            },
+          },
+        },
+      },
+    },
+
+    "/post/{id}": {
+      get: {
+        summary: "Get post by id",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
+        responses: {
+          "200": {
+            description: "OK",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/Post" } } },
+          },
+          "404": { description: "Not Found" },
+        },
+      },
+      put: {
+        summary: "Update post",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": { schema: { $ref: "#/components/schemas/PostCreate" } },
+          },
+        },
+        responses: {
+          "200": {
+            description: "OK",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/Post" } } },
+          },
+          "404": { description: "Not Found" },
+        },
+      },
+      delete: {
+        summary: "Delete post",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
+        responses: {
+          "200": { description: "OK" },
+          "404": { description: "Not Found" },
+        },
+      },
+    },
+
+    // COMMENTS (CRUD)
+    "/comment": {
+      post: {
+        summary: "Create comment",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": { schema: { $ref: "#/components/schemas/CommentCreate" } },
+          },
+        },
+        responses: {
+          "201": {
+            description: "Created",
+            content: {
+              "application/json": { schema: { $ref: "#/components/schemas/Comment" } },
+            },
+          },
+          "400": { description: "Bad Request" },
+        },
+      },
+      get: {
+        summary: "Get all comments",
+        parameters: [
+          { name: "postId", in: "query", required: false, schema: { type: "string" } },
+        ],
+        responses: {
+          "200": {
+            description: "OK",
+            content: {
+              "application/json": {
+                schema: { type: "array", items: { $ref: "#/components/schemas/Comment" } },
+              },
+            },
+          },
+        },
+      },
+    },
+
+    "/comment/{id}": {
+      get: {
+        summary: "Get comment by id",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
+        responses: {
+          "200": {
+            description: "OK",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/Comment" } } },
+          },
+          "404": { description: "Not Found" },
+        },
+      },
+      put: {
+        summary: "Update comment",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": { schema: { $ref: "#/components/schemas/CommentCreate" } },
+          },
+        },
+        responses: {
+          "200": {
+            description: "OK",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/Comment" } } },
+          },
+          "404": { description: "Not Found" },
+        },
+      },
+      delete: {
+        summary: "Delete comment",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
+        responses: {
+          "200": { description: "OK" },
+          "404": { description: "Not Found" },
+        },
+      },
+    },
   },
 
   components: {
@@ -227,6 +378,44 @@ export const swaggerSpec = {
         type: "object",
         properties: { accessToken: { type: "string" } },
         required: ["accessToken"],
+      },
+      Post: {
+        type: "object",
+        properties: {
+          _id: { type: "string" },
+          content: { type: "string" },
+          sender: { type: "string" },
+        },
+        required: ["_id", "content", "sender"],
+      },
+      PostCreate: {
+        type: "object",
+        properties: {
+          content: { type: "string" },
+          sender: { type: "string" },
+        },
+        required: ["content", "sender"],
+      },
+      Comment: {
+        type: "object",
+        properties: {
+          _id: { type: "string" },
+          postId: { type: "string" },
+          content: { type: "string" },
+          sender: { type: "string" },
+          createdAt: { type: "string", format: "date-time" },
+          updatedAt: { type: "string", format: "date-time" },
+        },
+        required: ["_id", "postId", "content", "sender", "createdAt", "updatedAt"],
+      },
+      CommentCreate: {
+        type: "object",
+        properties: {
+          postId: { type: "string" },
+          content: { type: "string" },
+          sender: { type: "string" },
+        },
+        required: ["postId", "content", "sender"],
       },
     },
   },

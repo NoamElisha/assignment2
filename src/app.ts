@@ -2,10 +2,10 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 
 import { swaggerSpec } from "./swagger";
-import { usersRouter } from "./routes/users.routes";
-import { postsRouter } from "./routes/posts.routes";
-import { commentsRouter } from "./routes/comments.routes";
-import { authRouter } from "./routes/auth.routes";
+import { usersRouter } from "./routes/usersRoutes";
+import { postsRouter } from "./routes/postsRoutes";
+import { commentsRouter } from "./routes/commentsRoutes";
+import { authRouter } from "./routes/authRoutes";
 
 export const app = express();
 
@@ -19,5 +19,5 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/users", usersRouter);
 app.use("/post", postsRouter);
-app.use("/comments", commentsRouter);
+app.use("/comment", commentsRouter);
 app.use("/auth", authRouter);
