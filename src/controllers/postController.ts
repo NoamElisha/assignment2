@@ -50,6 +50,9 @@ export const postController = {
         const updateData = req.body;
         try {
             const updatedPost = await Post.findByIdAndUpdate(postId, updateData, { new: true });
+            if (!updatedPost) {
+                return res.status(404).json({ message: "Post not found" });
+            }
             res.json(updatedPost);
         } catch (err) {
             console.error(err);
